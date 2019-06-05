@@ -2,14 +2,14 @@ module.exports = {
     app: {
         controller: 'controllers',
         production: {
-            api: 'https://api.example.com',
-            host: 'https://example.com',
+            api: 'http://logystic-rest.jelastic.regruhosting.ru',
+            host: 'http://logystic-rest.jelastic.regruhosting.ru',
             port: 8080
         },
         postman: {
             apiKey: "6ae93406f06e47a7bf563334ac848be7",
             collectionID: "202196ec-1804-42fe-9b8b-3ecb6825c951",
-            host: "https://api.example.com",
+            host: "http://logystic-rest.jelastic.regruhosting.ru",
         },
         development: {
             port: 3000

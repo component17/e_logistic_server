@@ -16,4 +16,11 @@ module.exports = {
     "POST /driver": "DriverController.create",
     "PATCH /driver/:id": "DriverController.update",
     "DELETE /driver/:id": "DriverController.delete",
+
+    //Заявки
+    "GET /request": "RequestController.find",
+    "GET /request/:id": "RequestController.getter",
+    "POST /request": "RequestController.create",
+    "PATCH /request/:id": "RequestController.update",
+    "DELETE /request/:id": "RequestController.delete",
 }

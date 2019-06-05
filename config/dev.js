@@ -7,5 +7,5 @@ module.exports = {
         user: 'admin',
         password: 'dac9fdac-b925-4c50-b860-0c9d778afcb8',
         name: 'logistic'
-    },
+    }
 };

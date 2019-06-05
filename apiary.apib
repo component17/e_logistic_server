@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://api.example.com
+HOST: http://logystic-rest.jelastic.regruhosting.ru
 # Logistic REST API Documentation
 # Group Авто
 
@@ -165,6 +165,95 @@ HOST: https://api.example.com
 
 
 ### Удалить запись [DELETE  /driver/{id}]
++ Response 200 (application/json)
+Удалить запись
+    + Body
+        {
+            "createAt": "2019-06-05T16:08:58.866Z",
+            "deleteAt": "2019-06-05T16:17:03.274Z",
+            "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
+            "name": "Автомобиль 100500",
+            "number": "p777ak",
+            "updateAt": "2019-06-05T16:14:34.270Z"
+        }
+
+
+
+# Group Заявки
+
+### Получить все [GET  /request]
++ Response 200 (application/json)
+Получить все
+    + Body
+        [
+            {
+                "createAt": "2019-06-05T16:08:58.866Z",
+                "deleteAt": null,
+                "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
+                "name": "Автомобиль 1",
+                "number": "p777ak",
+                "updateAt": "2019-06-05T16:08:58.866Z"
+            },
+            {
+                "createAt": "2019-06-05T16:09:04.407Z",
+                "deleteAt": null,
+                "id": "d8409480-9780-412d-bb74-4bcfeecf629d",
+                "name": "Автомобиль 2",
+                "number": "p777ak",
+                "updateAt": "2019-06-05T16:09:04.407Z"
+            }
+        ]
+
+
+### Получить одну запись [GET  /request/{id}]
++ Response 200 (application/json)
+Получить одну запись
+    + Body
+        {
+            "createAt": "2019-06-05T16:08:58.866Z",
+            "deleteAt": null,
+            "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
+            "name": "Автомобиль 1",
+            "number": "p777ak",
+            "updateAt": "2019-06-05T16:08:58.866Z"
+        }
+
+
+### Создать запись [POST  /request]+ Request (application/json)
+
+        {"name":"Заявка 2","number":"+7999999999"}
+
++ Response 200 (application/json)
+Создать запись
+    + Body
+        {
+            "createAt": "2019-06-05T16:09:04.407Z",
+            "deleteAt": null,
+            "id": "d8409480-9780-412d-bb74-4bcfeecf629d",
+            "name": "Автомобиль 2",
+            "number": "p777ak",
+            "updateAt": "2019-06-05T16:09:04.407Z"
+        }
+
+
+### Редактировать запись [PATCH  /request/{id}]+ Request (application/json)
+
+        {"name":"Водитель хуитель 123123","number":"123132"}
+
++ Response 200 (application/json)
+Редактировать запись
+    + Body
+        {
+            "createAt": "2019-06-05T16:08:58.866Z",
+            "deleteAt": null,
+            "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
+            "name": "Автомобиль 100500",
+            "number": "p777ak",
+            "updateAt": "2019-06-05T16:14:34.270Z"
+        }
+
+
+### Удалить запись [DELETE  /request/{id}]
 + Response 200 (application/json)
 Удалить запись
     + Body
