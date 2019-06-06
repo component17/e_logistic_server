@@ -127,27 +127,29 @@ module.exports = class Model {
 
     /**
      * Метод изменения категории
-     * @param id {String} - id категории которую собираемся изменять
-     * @param name {String} - название категории
+     * @param id {String} - id елемента
+     * @param data {Object} - Данные которые собираемся изменять
      * @return Promise
      */
-    update(id, name) {
+    update(id, data) {
         return new Promise(async (resolve, reject) => {
             try {
-                if (!name) {
-                    return reject({err: "Укажите обязательное поле [name]"})
+
+                if (!data) {
+                    return reject({err: "Укажите параметр [data]"})
                 }
+
                 let check = await this.isset(id)
                 if (!check) {
                     return reject({err: "Отказано в доступе"})
                 }
 
                 //Изменяем запись в БД
-                await ReQL.update(this.conn, this.db, this.table, {id}, {name, updateAt: r.now()})
+                await ReQL.update(this.conn, this.db, this.table, {id}, {...data, updateAt: r.now()})
 
-                let data = await this.getter(id)
+                let res = await this.getter(id)
 
-                return resolve(data)
+                return resolve(res)
             } catch (err) {
                 console.log(err)
                 reject(err)

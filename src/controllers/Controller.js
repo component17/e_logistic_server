@@ -37,7 +37,7 @@ module.exports = (conn, table, io) => {
 
         async update(req, res) {
             try {
-                let data = await Model.update(req.params.id, req.body.name)
+                let data = await Model.update(req.params.id, req.body)
 
                 return res.status(200).json(data)
             } catch (err) {
