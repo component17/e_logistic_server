@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "jsdoc-to-markdown": "^4.0.1",
-    "postman2apiary": "^1.0.5",
+    "postman2apiary": "^1.0.6",
     "swagger2blueprint": "^1.1.0"
   }
 }

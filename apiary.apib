@@ -27,7 +27,22 @@ HOST: http://logystic-rest.jelastic.regruhosting.ru
         ]
 
 
-### Создать запись [POST  /auto]+ Request (application/json)
+### Получить одну запись [GET  /auto/{id}]
++ Response 200 (application/json)
+Получить одну запись
+    + Body
+        {
+            "createAt": "2019-06-05T16:08:58.866Z",
+            "deleteAt": null,
+            "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
+            "name": "Автомобиль 1",
+            "number": "p777ak",
+            "updateAt": "2019-06-05T16:08:58.866Z"
+        }
+
+
+### Создать запись [POST  /auto]
++ Request (application/json)
 
         {"name":"Автомобиль 2","number":"p777ak"}
 
@@ -44,21 +59,8 @@ HOST: http://logystic-rest.jelastic.regruhosting.ru
         }
 
 
-### Получить одну запись [GET  /auto/{id}]
-+ Response 200 (application/json)
-Получить одну запись
-    + Body
-        {
-            "createAt": "2019-06-05T16:08:58.866Z",
-            "deleteAt": null,
-            "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
-            "name": "Автомобиль 1",
-            "number": "p777ak",
-            "updateAt": "2019-06-05T16:08:58.866Z"
-        }
-
-
-### Редактировать запись [PATCH  /auto/{id}]+ Request (application/json)
+### Редактировать запись [PATCH  /auto/{id}]
++ Request (application/json)
 
         {"name":"Автомобиль 3","number":"p777ak"}
 
@@ -116,7 +118,22 @@ HOST: http://logystic-rest.jelastic.regruhosting.ru
         ]
 
 
-### Создать запись [POST  /driver]+ Request (application/json)
+### Получить одну запись [GET  /driver/{id}]
++ Response 200 (application/json)
+Получить одну запись
+    + Body
+        {
+            "createAt": "2019-06-05T16:08:58.866Z",
+            "deleteAt": null,
+            "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
+            "name": "Автомобиль 1",
+            "number": "p777ak",
+            "updateAt": "2019-06-05T16:08:58.866Z"
+        }
+
+
+### Создать запись [POST  /driver]
++ Request (application/json)
 
         {"name":"Водитель 1","number":"+7999999999"}
 
@@ -133,21 +150,8 @@ HOST: http://logystic-rest.jelastic.regruhosting.ru
         }
 
 
-### Получить одну запись [GET  /driver/{id}]
-+ Response 200 (application/json)
-Получить одну запись
-    + Body
-        {
-            "createAt": "2019-06-05T16:08:58.866Z",
-            "deleteAt": null,
-            "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
-            "name": "Автомобиль 1",
-            "number": "p777ak",
-            "updateAt": "2019-06-05T16:08:58.866Z"
-        }
-
-
-### Редактировать запись [PATCH  /driver/{id}]+ Request (application/json)
+### Редактировать запись [PATCH  /driver/{id}]
++ Request (application/json)
 
         {"name":"Водитель хуитель","number":"123132"}
 
@@ -205,7 +209,22 @@ HOST: http://logystic-rest.jelastic.regruhosting.ru
         ]
 
 
-### Создать запись [POST  /request]+ Request (application/json)
+### Получить одну запись [GET  /request/{id}]
++ Response 200 (application/json)
+Получить одну запись
+    + Body
+        {
+            "createAt": "2019-06-05T16:08:58.866Z",
+            "deleteAt": null,
+            "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
+            "name": "Автомобиль 1",
+            "number": "p777ak",
+            "updateAt": "2019-06-05T16:08:58.866Z"
+        }
+
+
+### Создать запись [POST  /request]
++ Request (application/json)
 
         {"name":"Заявка 2","number":"+7999999999"}
 
@@ -222,21 +241,8 @@ HOST: http://logystic-rest.jelastic.regruhosting.ru
         }
 
 
-### Получить одну запись [GET  /request/{id}]
-+ Response 200 (application/json)
-Получить одну запись
-    + Body
-        {
-            "createAt": "2019-06-05T16:08:58.866Z",
-            "deleteAt": null,
-            "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
-            "name": "Автомобиль 1",
-            "number": "p777ak",
-            "updateAt": "2019-06-05T16:08:58.866Z"
-        }
-
-
-### Редактировать запись [PATCH  /request/{id}]+ Request (application/json)
+### Редактировать запись [PATCH  /request/{id}]
++ Request (application/json)
 
         {"name":"Водитель хуитель 123123","number":"123132"}
 
@@ -294,7 +300,22 @@ HOST: http://logystic-rest.jelastic.regruhosting.ru
         ]
 
 
-### Создать запись [POST  /counterparty]+ Request (application/json)
+### Получить одну запись [GET  /counterparty/{id}]
++ Response 200 (application/json)
+Получить одну запись
+    + Body
+        {
+            "createAt": "2019-06-05T16:08:58.866Z",
+            "deleteAt": null,
+            "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
+            "name": "Автомобиль 1",
+            "number": "p777ak",
+            "updateAt": "2019-06-05T16:08:58.866Z"
+        }
+
+
+### Создать запись [POST  /counterparty]
++ Request (application/json)
 
         {"name":"Контрагент 1","number":"+7999999999"}
 
@@ -311,21 +332,8 @@ HOST: http://logystic-rest.jelastic.regruhosting.ru
         }
 
 
-### Получить одну запись [GET  /counterparty/{id}]
-+ Response 200 (application/json)
-Получить одну запись
-    + Body
-        {
-            "createAt": "2019-06-05T16:08:58.866Z",
-            "deleteAt": null,
-            "id": "1d6e5d76-9e36-4bcc-88d0-0f32c0f2fcd3",
-            "name": "Автомобиль 1",
-            "number": "p777ak",
-            "updateAt": "2019-06-05T16:08:58.866Z"
-        }
-
-
-### Редактировать запись [PATCH  /counterparty/{id}]+ Request (application/json)
+### Редактировать запись [PATCH  /counterparty/{id}]
++ Request (application/json)
 
         {"name":"Водитель хуитель 123123","number":"123132"}
 
