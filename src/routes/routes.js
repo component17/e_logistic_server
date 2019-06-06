@@ -23,4 +23,11 @@ module.exports = {
     "POST /request": "RequestController.create",
     "PATCH /request/:id": "RequestController.update",
     "DELETE /request/:id": "RequestController.delete",
+
+    //Контрагенты
+    "GET /counterparty": "CounterpartyController.find",
+    "GET /counterparty/:id": "CounterpartyController.getter",
+    "POST /counterparty": "CounterpartyController.create",
+    "PATCH /counterparty/:id": "CounterpartyController.update",
+    "DELETE /counterparty/:id": "CounterpartyController.delete",
 }
