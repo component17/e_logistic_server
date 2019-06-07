@@ -52,7 +52,7 @@ module.exports = async (app, http) => {
             console.warn("Имеются не описанные в файле [config/prod.js][tables] таблицы в БД ", notUsed)
         }
 
-        const io = require('./socket')(http, conn);
+        const io = config.socket.init ? require('./socket')(http, conn) : null;
         require('./routes')(app, conn, io)
 
         http.listen(port, () => {

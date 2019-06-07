@@ -15,6 +15,10 @@ module.exports = {
             port: 3000
         }
     },
+    socket: {
+        //Подключать ли socket.io
+        init: false,
+    },
     routes: {
         methods: [
             'GET',

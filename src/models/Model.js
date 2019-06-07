@@ -84,7 +84,7 @@ module.exports = class Model {
     find(query) {
         return new Promise(async (resolve, reject) => {
             try {
-                let data = await ReQL.select(this.conn, this.db, this.table, {...query})
+                let data = await ReQL.select(this.conn, this.db, this.table, {...query, deleteAt: null})
                 return resolve(data)
             } catch (err) {
                 console.log(err)
