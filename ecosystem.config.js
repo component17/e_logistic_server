@@ -2,7 +2,7 @@ module.exports = {
   apps : [
     {
       name: "logistic",
-      script: "src/index.js",
+      script: "./index.js",
       args : "prod",
       watch: true,
       ignore_watch: [
