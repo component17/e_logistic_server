@@ -1,5 +1,7 @@
 const TableName = 'companies';
 
+const shortid = require('shortid');
+
 module.exports = (r, conn) => {
     return {
         getAll(){
@@ -25,7 +27,9 @@ module.exports = (r, conn) => {
                 let req = Object.assign(model, {
                     created_at: r.now(),
                     update_at: r.now(),
-                    delete_at: null
+                    delete_at: null,
+                    login: shortid.generate(),
+                    password: shortid.generate()
                 });
 
                 r.table(TableName).insert(req).run(conn, (err, data) => {
@@ -61,6 +65,14 @@ module.exports = (r, conn) => {
                 r.table(TableName).get(id).update({delete_at: r.now()}).run(conn, (err) => {
                     if(err) return reject(err);
                     resolve('ok');
+                })
+            })
+        },
+        auth(login, password){
+            return new Promise((resolve, reject) => {
+                r.table(TableName).filter({login, password}).coerceTo('array').run(conn, (err, data) => {
+                    if(err) return reject(err);
+                    resolve(data);
                 })
             })
         }

@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const jwt = require('jsonwebtoken');
+
 const r = require('rethinkdb');
 let conn = null;
 
@@ -34,13 +36,38 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-const ApiV1 = require('./api/v1/index');
+const ApiV1Admin = require('./api/v1/admin/index');
 
-app.use('/api/v1', ApiV1.Car);
-app.use('/api/v1', ApiV1.Driver);
-app.use('/api/v1', ApiV1.Company);
-app.use('/api/v1', ApiV1.Order);
-app.use('/api/v1', ApiV1.Tsd);
+app.use('/api/v1/admin', ApiV1Admin.Car);
+app.use('/api/v1/admin', ApiV1Admin.Driver);
+app.use('/api/v1/admin', ApiV1Admin.Company);
+app.use('/api/v1/admin', ApiV1Admin.Order);
+app.use('/api/v1/admin', ApiV1Admin.Tsd);
+
+app.use('/api/v1/company', (req, res, next) => {
+    if(req.path === '/auth/login'){
+        next()
+    }else{
+        let token = req.get('Authorization');
+        if(token){
+            try {
+                let decoded = jwt.verify(token, 'component-team');
+                req.company_id = decoded.company_id;
+                next();
+            } catch(err) {
+                res.status(401).json({err: "Ошибка авторизации!"})
+            }
+        }else{
+            res.status(401).json({err: "Ошибка авторизации!"})
+        }
+    }
+
+});
+
+const ApiV1Company = require('./api/v1/company/index');
+
+app.use('/api/v1/company', ApiV1Company.Auth);
+app.use('/api/v1/company', ApiV1Company.Order);
 
 
 

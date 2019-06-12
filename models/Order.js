@@ -2,6 +2,15 @@ const TableName = 'orders';
 
 module.exports = (r, conn) => {
     return {
+        getAllCompany(company_id){
+            return new Promise((resolve, reject) => {
+                r.table(TableName).filter({delete_at: null, company_id}).coerceTo('array').run(conn, (err, data) => {
+                    if(err) return reject(err);
+
+                    resolve(data);
+                })
+            })
+        },
         getAll(){
             return new Promise((resolve, reject) => {
                 r.table(TableName).filter({delete_at: null}).coerceTo('array').run(conn, (err, data) => {
@@ -22,17 +31,28 @@ module.exports = (r, conn) => {
         create(model){
             return new Promise((resolve, reject) => {
 
+                if(!model.car_id) model.car_id = null;
+                if(model.delivery_at){
+                    model.delivery_at = r.ISO8601(model.delivery_at)
+                }else{
+                    model.delivery_at = r.now()
+                }
+
                 let req = Object.assign(model, {
                     created_at: r.now(),
                     update_at: r.now(),
                     delete_at: null,
-                    delivery_at: r.now()
+                    status: 'processing',
+                    positions_tsd: [],
                 });
+
+
 
                 r.table(TableName).insert(req).run(conn, (err, data) => {
                     if(err) return reject(err);
 
                     req.id = data.generated_keys[0];
+                    req.created_at = new Date().toISOString();
 
                     resolve(req);
                 })
@@ -74,7 +94,7 @@ module.exports = (r, conn) => {
                 r.table(TableName).filter({car_id: null, delete_at: null}).coerceTo('array').run(conn, (err, data) => {
                     if(err) return reject(err);
 
-                    console.log(data)
+                    console.log(data);
 
                     resolve(data);
                 })
@@ -106,7 +126,7 @@ module.exports = (r, conn) => {
                 end.setHours(23,59,59,999);
 
                 r.table(TableName).filter((item) => {
-                    return item('delivery_at').during(r.ISO8601(start.toISOString()), r.ISO8601(end.toISOString())).and(item('delete_at').eq(null)).and(item('car_id').eq(car_id))
+                    return item('delivery_at').during(r.ISO8601(start.toISOString()), r.ISO8601(end.toISOString())).and(item('delete_at').eq(null)).and(item('car_id').eq(car_id).and(item('status').ne('success')))
                 }).merge((order) => {
                     return {
                         company: r.table('companies').get(order('company_id'))
