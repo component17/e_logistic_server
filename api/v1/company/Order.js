@@ -51,7 +51,7 @@ router.post(Endpoint + '/:id', async (req, res) => {
 
             res.status(200).json(result);
         }else{
-            res.status(403).json({message: 'Доступ запрещен', order, id: req.params.id});
+            res.status(403).json({message: 'Доступ запрещен', order, id: req.params.id, new_state: req.body});
         }
     }catch (err) {
         res.status(500).json({err})
