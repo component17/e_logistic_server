@@ -45,14 +45,13 @@ router.post(Endpoint + '/:id', async (req, res) => {
 
         }
 
-        let new_state = req.body;
-        delete new_state.id;
-        delete new_state.created_at;
-        delete new_state.company_id;
-        delete new_state.car_id;
-        delete new_state.itemRaw;
+        delete req.body.id;
+        delete req.body.created_at;
+        delete req.body.company_id;
+        delete req.body.car_id;
+        delete req.body.itemRaw;
 
-        let result = await Model[ModelName].update(req.params.id, new_state);
+        let result = await Model[ModelName].update(req.params.id, req.body);
 
         res.status(200).json(result);
     }catch (err) {
