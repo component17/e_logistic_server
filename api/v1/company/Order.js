@@ -38,7 +38,7 @@ router.post(Endpoint, async (req, res) => {
 
 router.post(Endpoint + '/:id', async (req, res) => {
     try{
-        let order = Model[ModelName].getById(req.params.id);
+        let order = await Model[ModelName].getById(req.params.id);
 
         if(order && order.company_id === req.company_id && order.status !== 'success'){
             let new_state = req.body;
