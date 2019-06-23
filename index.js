@@ -25,7 +25,7 @@ r.connect({
 
     Model = Schema(r, connect);
 
-    app.listen(80, () => {
+    app.listen(3000, () => {
         console.log('Server listener port 80');
     });
 });
