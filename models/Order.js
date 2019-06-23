@@ -81,7 +81,7 @@ module.exports = (r, conn) => {
                     if(err) return reject(err);
 
                     try{
-                        let res = this.getById(id);
+                        let res = await this.getById(id);
                         resolve(res);
                     }catch(e) {
                         reject(e)
