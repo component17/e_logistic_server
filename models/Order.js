@@ -4,7 +4,7 @@ module.exports = (r, conn) => {
     return {
         getAllCompany(company_id){
             return new Promise((resolve, reject) => {
-                r.table(TableName).filter({delete_at: null, company_id}).coerceTo('array').run(conn, (err, data) => {
+                r.table(TableName).filter({delete_at: null, company_id}).orderBy(r.desc('created_at')).coerceTo('array').run(conn, (err, data) => {
                     if(err) return reject(err);
 
                     resolve(data);
@@ -13,7 +13,7 @@ module.exports = (r, conn) => {
         },
         getAll(){
             return new Promise((resolve, reject) => {
-                r.table(TableName).filter({delete_at: null}).coerceTo('array').run(conn, (err, data) => {
+                r.table(TableName).filter({delete_at: null}).orderBy(r.desc('created_at')).coerceTo('array').run(conn, (err, data) => {
                     if(err) return reject(err);
 
                     resolve(data);
@@ -67,6 +67,16 @@ module.exports = (r, conn) => {
 
                 if(model.delivery_at){
                     req.delivery_at = r.ISO8601(model.delivery_at)
+                }
+
+                if(!model.status){
+                    if(model.car_id && model.car_id.length){
+                        console.log('set to car');
+                        req.status = 'work'
+                    }else{
+                        console.log('unset on car');
+                        req.status = 'processing'
+                    }
                 }
 
                 r.table(TableName).get(id).update(req).run(conn, async (err) => {
