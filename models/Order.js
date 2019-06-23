@@ -66,7 +66,7 @@ module.exports = (r, conn) => {
                 });
 
                 if(model.delivery_at){
-                    req.delivery_at = r.ISO8601(model.delivery_at)
+                    req.delivery_at = r.ISO8601(new Date(model.delivery_at).toISOString())
                 }
 
                 if(!model.status){
@@ -77,11 +77,14 @@ module.exports = (r, conn) => {
                     }
                 }
 
-                r.table(TableName).get(id).update(req).run(conn, async (err) => {
+                r.table(TableName).get(id).update(req, {returnChanges: "always"}).run(conn, async (err, data) => {
                     if(err) return reject(err);
+
+                    console.log(111111, data);
 
                     try{
                         let res = await this.getById(id);
+                        console.log(res)
                         resolve(res);
                     }catch(e) {
                         reject(e)

@@ -49,7 +49,7 @@ router.post(Endpoint + '/:id', async (req, res) => {
         delete req.body.created_at;
         delete req.body.company_id;
         delete req.body.car_id;
-        delete req.body.itemRaw;
+        delete req.body.itemsRaw;
 
         let result = await Model[ModelName].update(req.params.id, req.body);
 
