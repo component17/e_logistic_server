@@ -36,4 +36,26 @@ router.post(Endpoint, async (req, res) => {
     }
 });
 
+router.post(Endpoint + '/:id', async (req, res) => {
+    try{
+        let order = Model[ModelName].getById(req.params.id);
+
+        if(order && order.company_id === req.company_id && order.status !== 'success'){
+            let new_state = req.body;
+            delete new_state.id;
+            delete new_state.created_at;
+            delete new_state.company_id;
+            delete order.car_id;
+
+            let result = await Model[ModelName].update(req.params.id, new_state);
+
+            res.status(200).json(result);
+        }else{
+            res.status(403).json({message: 'Доступ запрещен'});
+        }
+    }catch (err) {
+        res.status(500).json({err})
+    }
+});
+
 module.exports = router;

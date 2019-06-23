@@ -71,10 +71,8 @@ module.exports = (r, conn) => {
 
                 if(!model.status){
                     if(model.car_id && model.car_id.length){
-                        console.log('set to car');
                         req.status = 'work'
                     }else{
-                        console.log('unset on car');
                         req.status = 'processing'
                     }
                 }
