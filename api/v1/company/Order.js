@@ -40,19 +40,21 @@ router.post(Endpoint + '/:id', async (req, res) => {
     try{
         let order = await Model[ModelName].getById(req.params.id);
 
-        if(order && order.company_id === req.company_id && order.status !== 'success'){
-            let new_state = req.body;
-            delete new_state.id;
-            delete new_state.created_at;
-            delete new_state.company_id;
-            delete new_state.car_id;
+        if(!order && order.company_id !== req.company_id && order.status === 'success'){
+            return  res.status(403).json({message: 'Доступ запрещен', order, id: req.params.id, new_state: req.body});
 
-            let result = await Model[ModelName].update(req.params.id, new_state);
-
-            res.status(200).json(result);
-        }else{
-            res.status(403).json({message: 'Доступ запрещен', order, id: req.params.id, new_state: req.body});
         }
+
+        let new_state = req.body;
+        delete new_state.id;
+        delete new_state.created_at;
+        delete new_state.company_id;
+        delete new_state.car_id;
+        delete new_state.itemRaw;
+
+        let result = await Model[ModelName].update(req.params.id, new_state);
+
+        res.status(200).json(result);
     }catch (err) {
         res.status(500).json({err})
     }
