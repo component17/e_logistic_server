@@ -45,7 +45,7 @@ router.post(Endpoint + '/:id', async (req, res) => {
             delete new_state.id;
             delete new_state.created_at;
             delete new_state.company_id;
-            delete order.car_id;
+            delete new_state.car_id;
 
             let result = await Model[ModelName].update(req.params.id, new_state);
 
