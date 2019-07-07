@@ -13,6 +13,15 @@ module.exports = (r, conn) => {
                 })
             })
         },
+        getAllandDelete(){
+            return new Promise((resolve, reject) => {
+                r.table(TableName).coerceTo('array').run(conn, (err, data) => {
+                    if(err) return reject(err);
+
+                    resolve(data);
+                })
+            })
+        },
         getById(id){
             return new Promise((resolve, reject) => {
                 r.table(TableName).get(id).run(conn, (err, data) => {

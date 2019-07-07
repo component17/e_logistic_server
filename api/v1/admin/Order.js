@@ -7,7 +7,32 @@ const ModelName = 'Order';
 router.get(Endpoint + '/report/:date', async (req, res) => {
     try{
         let data = await Model.Order.report(req.params.date);
-        res.status(200).json(data);
+
+        let companies = await Model.Company.getAllandDelete();
+        let cars = await Model.Car.getAll();
+
+        let getCompany = (id) => {
+            let index = companies.findIndex(i => i.id === id);
+            return companies[index]
+        };
+
+        let getCar = (id) => {
+            let index = cars.findIndex(i => i.id === id);
+            return cars[index]
+        };
+
+        let list = data.map((i) => {
+            return i.positions_tsd.map((barcode) => {
+                return {
+                    barcode,
+                    order_number: i.number,
+                    company_name: getCompany(i.company_id).name,
+                    car_number: getCar(i.car_id).number
+                }
+            })
+        });
+
+        res.status(200).json(list);
     }catch (error) {
         res.status(500).json({error});
     }
