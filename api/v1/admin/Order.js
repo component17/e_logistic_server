@@ -4,6 +4,15 @@ const router = express.Router();
 const Endpoint = '/order';
 const ModelName = 'Order';
 
+router.get(Endpoint + '/report/:date', async (req, res) => {
+    try{
+        let data = await Model.Order.report(req.params.date);
+        res.status(200).json(data);
+    }catch (error) {
+        res.status(500).json({error});
+    }
+});
+
 router.get(Endpoint + '/no-sync-car', async (req, res) => {
     try{
         let data = await Model.Order.getNoSync();

@@ -2,6 +2,23 @@ const TableName = 'orders';
 
 module.exports = (r, conn) => {
     return {
+        report(date){
+            return new Promise((resolve, reject) => {
+                let start = new Date(+date);
+                start.setHours(0,0,0,0);
+
+                let end = new Date(+date);
+                end.setHours(23,59,59,999);
+
+                r.table(TableName).filter((item) => {
+                    return item('delivery_at').during(r.ISO8601(start.toISOString()), r.ISO8601(end.toISOString())).and(item('delete_at').eq(null)).and(item('status').eq('success'))
+                }).coerceTo('array').run(conn, (err, data) => {
+                    if(err) return reject(err);
+
+                    resolve(data);
+                })
+            })
+        },
         getAllCompany(company_id){
             return new Promise((resolve, reject) => {
                 r.table(TableName).filter({delete_at: null, company_id}).orderBy(r.desc('created_at')).coerceTo('array').run(conn, (err, data) => {
