@@ -21,16 +21,18 @@ router.get(Endpoint + '/report/:date', async (req, res) => {
             return cars[index]
         };
 
-        let list = data.map((i) => {
-            return i.positions_tsd.map((barcode) => {
-                return {
-                    barcode,
-                    order_number: i.number,
-                    company_name: getCompany(i.company_id).name,
-                    car_number: getCar(i.car_id).number
-                }
-            })
-        });
+        let list = [];
+
+            data.map((i) => {
+                i.positions_tsd.map((barcode) => {
+                    list.push({
+                        barcode,
+                        order_number: i.number,
+                        company_name: getCompany(i.company_id).name,
+                        car_number: getCar(i.car_id).number
+                    });
+                })
+            });
 
         res.status(200).json(list);
     }catch (error) {
